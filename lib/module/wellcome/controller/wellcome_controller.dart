@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:chatify/state_util.dart';
 import '../view/wellcome_view.dart';
 
 class WellcomeController extends State<WellcomeView> {

@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:chatify/core.dart';
-import '../controller/signup_controller.dart';
+import '../controller/chat_controller.dart';
 
-class SignupView extends StatefulWidget {
-  const SignupView({Key? key}) : super(key: key);
+class ChatView extends StatefulWidget {
+  const ChatView({Key? key}) : super(key: key);
 
-  Widget build(context, SignupController controller) {
+  Widget build(context, ChatController controller) {
     controller.view = this;
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Signup"),
+        title: const Text("Chat"),
         actions: const [],
       ),
       body: SingleChildScrollView(
@@ -25,5 +25,5 @@ class SignupView extends StatefulWidget {
   }
 
   @override
-  State<SignupView> createState() => SignupController();
+  State<ChatView> createState() => ChatController();
 }

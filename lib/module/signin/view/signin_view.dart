@@ -1,6 +1,7 @@
+import 'package:chatify/shared/widget/re_logo_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:chatify/core.dart';
-import '../controller/signin_controller.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class SigninView extends StatefulWidget {
   const SigninView({Key? key}) : super(key: key);
@@ -9,15 +10,37 @@ class SigninView extends StatefulWidget {
     controller.view = this;
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Signin"),
-        actions: const [],
-      ),
       body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(10.0),
+        child: Form(
+          key: controller.key,
           child: Column(
-            children: const [],
+            children: [
+              SizedBox(height: Get.height * 0.24),
+              const ReLogoWidget(),
+              SizedBox(height: Get.height * 0.09),
+              SizedBox(
+                width: Get.width * 0.74,
+                height: Get.height * 0.03,
+                child: Text(
+                  "Wellcome to Chatify",
+                  style: GoogleFonts.poppins(
+                      color: const Color(0xFF000000),
+                      fontWeight: FontWeight.w700,
+                      fontSize: 20),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+              SizedBox(height: Get.height * 0.05),
+              Text(
+                "Phone Number",
+                style: GoogleFonts.poppins(
+                  color: const Color(0xFF000000),
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
+              TextFormField()
+            ],
           ),
         ),
       ),

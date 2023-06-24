@@ -3,7 +3,8 @@
         "wellcome",
         "signin",
         "signup",
-        "enter_otp"
+        "enter_otp",
+        "chat"
     ],
     "module_directory_name": "module",
     "experimental_mode": false,

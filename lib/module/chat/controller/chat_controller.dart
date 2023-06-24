@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../view/enter_otp_view.dart';
+import '../view/chat_view.dart';
 
-class EnterOtpController extends State<EnterOtpView> {
-  static late EnterOtpController instance;
-  late EnterOtpView view;
+class ChatController extends State<ChatView> {
+  static late ChatController instance;
+  late ChatView view;
 
   @override
   void initState() {

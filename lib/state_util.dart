@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 BuildContext get globalContext {
   return Get.currentContext;
@@ -34,7 +35,7 @@ class Get {
   }
 
   static double get height {
-    return MediaQuery.of(currentContext).size.width;
+    return MediaQuery.of(currentContext).size.height;
   }
 
   static ValueNotifier<ThemeData> mainTheme =
@@ -45,6 +46,15 @@ class Get {
 
   static ThemeData get theme {
     return Theme.of(Get.currentContext);
+  }
+
+  static Future<void> launchUrls(Uri url) async {
+    if (!await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch url');
+    }
   }
 }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:chatify/state_util.dart';
 import '../view/signin_view.dart';
 
 class SigninController extends State<SigninView> {
@@ -17,4 +16,6 @@ class SigninController extends State<SigninView> {
 
   @override
   Widget build(BuildContext context) => widget.build(context, this);
+
+  GlobalKey key = GlobalKey<FormState>();
 }
