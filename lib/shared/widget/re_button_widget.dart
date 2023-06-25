@@ -25,7 +25,8 @@ class ReButtonWidget extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         title,
-        style: GoogleFonts.poppins(color: Colors.white),
+        style: GoogleFonts.poppins(
+            color: Colors.white, fontWeight: FontWeight.w700),
       ),
     );
   }

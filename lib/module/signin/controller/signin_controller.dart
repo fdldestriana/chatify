@@ -1,5 +1,5 @@
+import 'package:chatify/module/signin/view/signin_view.dart';
 import 'package:flutter/material.dart';
-import '../view/signin_view.dart';
 
 class SigninController extends State<SigninView> {
   static late SigninController instance;
@@ -12,10 +12,15 @@ class SigninController extends State<SigninView> {
   }
 
   @override
-  void dispose() => super.dispose();
+  void dispose() {
+    super.dispose();
+    textController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) => widget.build(context, this);
 
-  GlobalKey key = GlobalKey<FormState>();
+  final GlobalKey<FormState> key = GlobalKey<FormState>();
+
+  TextEditingController textController = TextEditingController();
 }

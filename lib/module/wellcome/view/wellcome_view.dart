@@ -46,8 +46,8 @@ class WellcomeView extends StatefulWidget {
                         style:
                             GoogleFonts.poppins(color: const Color(0xFF31C48D)),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () =>
-                              Get.launchUrls(Uri.parse('https://flutter.dev'))),
+                          ..onTap = () async => await Get.launchUrls(
+                              Uri.parse('https://flutter.dev'))),
                     const TextSpan(
                         text: "Tap \"Agree and\nContinue\" to accept"),
                     TextSpan(
@@ -55,8 +55,8 @@ class WellcomeView extends StatefulWidget {
                         style:
                             GoogleFonts.poppins(color: const Color(0xFF31C48D)),
                         recognizer: TapGestureRecognizer()
-                          ..onTap = () =>
-                              Get.launchUrls(Uri.parse('https://flutter.dev'))),
+                          ..onTap = () async => await Get.launchUrls(
+                              Uri.parse('https://flutter.dev'))),
                   ],
                 ),
               ),
