@@ -2,6 +2,8 @@ import 'package:chatify/module/signin/widget/component/re_remember_widget.dart';
 import 'package:chatify/module/signin/widget/component/re_textformfield_widget.dart';
 import 'package:chatify/shared/widget/re_button_widget.dart';
 import 'package:chatify/shared/widget/re_logo_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:chatify/core.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -67,8 +69,29 @@ class SigninView extends StatefulWidget {
                         height: Get.height * 0.06,
                         onPressed: (input.isEmpty)
                             ? null
-                            : () {
-                                if (controller.key.currentState!.validate()) {}
+                            : () async {
+                                if (controller.key.currentState!.validate()) {
+                                  try {
+                                    await FirebaseAuth.instance
+                                        .verifyPhoneNumber(
+                                            phoneNumber: input.replaceFirst(
+                                                RegExp(r'0'), '+62'),
+                                            verificationCompleted:
+                                                (PhoneAuthCredential cred) {
+                                              FirebaseAuth.instance
+                                                  .signInWithCredential(cred);
+                                            },
+                                            verificationFailed: (e) {
+                                              throw Exception(e.message);
+                                            },
+                                            codeSent: (verificationId,
+                                                forceResendingToken) {},
+                                            codeAutoRetrievalTimeout:
+                                                (verificationId) {});
+                                  } on FirebaseAuthException catch (e) {
+                                    throw Exception(e.message);
+                                  }
+                                }
                               })
                   ],
                 ),
