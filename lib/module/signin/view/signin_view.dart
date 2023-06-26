@@ -51,6 +51,10 @@ class SigninView extends StatefulWidget {
                     ReTextFormFieldWidget(
                       controller: controller.textController,
                       onFieldSubmitted: (input) {
+                        if (input.isEmpty) {
+                          controller.key.currentState!.reset();
+                          controller.textController.clear();
+                        }
                         controller.update();
                       },
                     ),

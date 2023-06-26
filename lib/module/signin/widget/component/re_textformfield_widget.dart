@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:chatify/state_util.dart';
 
 class ReTextFormFieldWidget extends StatelessWidget {
-  const ReTextFormFieldWidget(
-      {super.key, required this.controller, this.onFieldSubmitted});
+  const ReTextFormFieldWidget({
+    super.key,
+    required this.controller,
+    this.onFieldSubmitted,
+  });
 
   final TextEditingController controller;
   final void Function(String)? onFieldSubmitted;
@@ -12,8 +15,7 @@ class ReTextFormFieldWidget extends StatelessWidget {
   String? validator(input) {
     if (!Validator.isNumber(input)) {
       return "Input is not a number";
-    }
-    if (Validator.isLengthInRange(input, 10, 12)) {
+    } else if (!Validator.isLengthInRange(input, 10, 12)) {
       return "Input does not have a valid length";
     }
 
