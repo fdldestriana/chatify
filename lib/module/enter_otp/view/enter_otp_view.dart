@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:chatify/core.dart';
-import '../controller/enter_otp_controller.dart';
 
 class EnterOtpView extends StatefulWidget {
   const EnterOtpView({Key? key}) : super(key: key);
@@ -10,12 +9,20 @@ class EnterOtpView extends StatefulWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("EnterOtp"),
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          onPressed: () => Get.back(),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Color(0xFF31C48D),
+          ),
+        ),
+        title: const Text("Enter OTP Code"),
         actions: const [],
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: const EdgeInsets.all(10.0),
+          padding: EdgeInsets.symmetric(horizontal: Get.width * 0.05),
           child: const Column(
             children: [],
           ),

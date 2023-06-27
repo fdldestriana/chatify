@@ -12,8 +12,15 @@ class SignupController extends State<SignupView> {
   }
 
   @override
-  void dispose() => super.dispose();
+  void dispose() {
+    super.dispose();
+    textController.dispose();
+  }
 
   @override
   Widget build(BuildContext context) => widget.build(context, this);
+
+  final GlobalKey<FormState> key = GlobalKey<FormState>();
+
+  TextEditingController textController = TextEditingController();
 }
