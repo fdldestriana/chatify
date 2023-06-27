@@ -86,8 +86,15 @@ class SigninView extends StatefulWidget {
                                               throw Exception(e.message);
                                             },
                                             codeSent: (verificationId,
-                                                forceResendingToken) {
-                                              print(verificationId);
+                                                forceResendingToken) async {
+                                              String smsCode = "";
+                                              PhoneAuthCredential cred =
+                                                  PhoneAuthProvider.credential(
+                                                      verificationId:
+                                                          verificationId,
+                                                      smsCode: smsCode);
+                                              await FirebaseAuth.instance
+                                                  .signInWithCredential(cred);
                                             },
                                             codeAutoRetrievalTimeout:
                                                 (verificationId) {});
