@@ -2,7 +2,6 @@ import 'package:chatify/module/signin/widget/component/re_remember_widget.dart';
 import 'package:chatify/module/signin/widget/component/re_textformfield_widget.dart';
 import 'package:chatify/shared/widget/re_button_widget.dart';
 import 'package:chatify/shared/widget/re_logo_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:chatify/core.dart';
@@ -70,38 +69,7 @@ class SigninView extends StatefulWidget {
                         onPressed: (input.isEmpty)
                             ? null
                             : () async {
-                                if (controller.key.currentState!.validate()) {
-                                  try {
-                                    await FirebaseAuth.instance
-                                        .verifyPhoneNumber(
-                                            phoneNumber: input.replaceFirst(
-                                                RegExp(r'0'), '+62'),
-                                            verificationCompleted:
-                                                (PhoneAuthCredential
-                                                    cred) async {
-                                              await FirebaseAuth.instance
-                                                  .signInWithCredential(cred);
-                                            },
-                                            verificationFailed: (e) {
-                                              throw Exception(e.message);
-                                            },
-                                            codeSent: (verificationId,
-                                                forceResendingToken) async {
-                                              String smsCode = "";
-                                              PhoneAuthCredential cred =
-                                                  PhoneAuthProvider.credential(
-                                                      verificationId:
-                                                          verificationId,
-                                                      smsCode: smsCode);
-                                              await FirebaseAuth.instance
-                                                  .signInWithCredential(cred);
-                                            },
-                                            codeAutoRetrievalTimeout:
-                                                (verificationId) {});
-                                  } on FirebaseAuthException catch (e) {
-                                    throw Exception(e.message);
-                                  }
-                                }
+                                if (controller.key.currentState!.validate()) {}
                               }),
                     SizedBox(height: Get.height * 0.06),
                     Center(
