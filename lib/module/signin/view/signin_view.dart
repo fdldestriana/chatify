@@ -13,6 +13,7 @@ class SigninView extends StatefulWidget {
   Widget build(context, SigninController controller) {
     controller.view = this;
     String input = controller.textController.text;
+    AuthService authService = AuthService();
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -63,14 +64,19 @@ class SigninView extends StatefulWidget {
                     const ReRememberWidget(),
                     SizedBox(height: Get.height * 0.03),
                     ReButtonWidget(
-                        title: "Sign in",
-                        width: Get.width * 0.77,
-                        height: Get.height * 0.06,
-                        onPressed: (input.isEmpty)
-                            ? null
-                            : () async {
-                                if (controller.key.currentState!.validate()) {}
-                              }),
+                      title: "Sign in",
+                      width: Get.width * 0.77,
+                      height: Get.height * 0.06,
+                      onPressed: (input.isEmpty)
+                          ? null
+                          : () async {
+                              if (controller.key.currentState!.validate()) {
+                                await authService.signUsingPhoneNumber(
+                                    input: input);
+                                Get.to(const EnterOtpView());
+                              }
+                            },
+                    ),
                     SizedBox(height: Get.height * 0.06),
                     Center(
                       child: RichText(
