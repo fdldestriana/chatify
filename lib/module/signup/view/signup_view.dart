@@ -1,9 +1,11 @@
 import 'package:chatify/module/signin/widget/component/re_remember_widget.dart';
 import 'package:chatify/module/signin/widget/component/re_textformfield_widget.dart';
+import 'package:chatify/shared/enum/authstate.dart';
+import 'package:chatify/shared/widget/re_bottotextauthscreen_widget.dart';
 import 'package:chatify/shared/widget/re_button_widget.dart';
+import 'package:chatify/shared/widget/re_loading_widget.dart';
 import 'package:chatify/shared/widget/re_logo_widget.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
+import 'package:chatify/shared/widget/re_notloggedin_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:chatify/core.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,8 +15,8 @@ class SignupView extends StatefulWidget {
 
   Widget build(context, SignupController controller) {
     controller.view = this;
-    String input = controller.textController.text;
-
+    String phoneNumb = controller.textController.text;
+    AuthService authService = AuthService();
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -23,20 +25,10 @@ class SignupView extends StatefulWidget {
             children: [
               SizedBox(height: Get.height * 0.20),
               const ReLogoWidget(),
-              SizedBox(height: Get.height * 0.09),
-              SizedBox(
-                width: Get.width * 0.74,
-                height: Get.height * 0.04,
-                child: Text(
-                  "Sign up for free",
-                  style: GoogleFonts.poppins(
-                      color: const Color(0xFF000000),
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              SizedBox(height: Get.height * 0.04),
+              if (controller.authState == AuthState.notLoggedIn)
+                const ReNotLoggedInWidget(title: "Sign in to your Account")
+              else
+                const ReLoadingWidget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.11),
                 child: Column(
@@ -68,56 +60,19 @@ class SignupView extends StatefulWidget {
                         title: "Sign up",
                         width: Get.width * 0.77,
                         height: Get.height * 0.06,
-                        onPressed: (input.isEmpty)
-                            ? null
-                            : () async {
+                        onPressed: (phoneNumb.isNotEmpty)
+                            ? () async {
                                 if (controller.key.currentState!.validate()) {
-                                  try {
-                                    await FirebaseAuth.instance
-                                        .verifyPhoneNumber(
-                                            phoneNumber: input.replaceFirst(
-                                                RegExp(r'0'), '+62'),
-                                            verificationCompleted:
-                                                (PhoneAuthCredential cred) {
-                                              FirebaseAuth.instance
-                                                  .signInWithCredential(cred);
-                                            },
-                                            verificationFailed: (e) {
-                                              throw Exception(e.message);
-                                            },
-                                            codeSent: (verificationId,
-                                                forceResendingToken) {},
-                                            codeAutoRetrievalTimeout:
-                                                (verificationId) {});
-                                  } on FirebaseAuthException catch (e) {
-                                    throw Exception(e.message);
-                                  }
+                                  await authService
+                                      .signUsingPhoneNumber(phoneNumb);
                                 }
-                              }),
+                              }
+                            : null),
                     SizedBox(height: Get.height * 0.06),
-                    Center(
-                      child: RichText(
-                        text: TextSpan(
-                          text: "Already have an Account? ",
-                          style: GoogleFonts.poppins(
-                            color: const Color(0xFF000000),
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: "Sign in",
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () => Get.offAll(const SigninView()),
-                              style: GoogleFonts.poppins(
-                                color: const Color(0xFF31C48D),
-                                fontSize: 15,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    ReBottomTextAuthScreenWidget(
+                      text: "Already have an Account? ",
+                      title: "Sign in",
+                      onTap: () => Get.offAll(const SigninView()),
                     )
                   ],
                 ),

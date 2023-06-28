@@ -10,21 +10,20 @@ class AuthService {
     }
   }
 
-  Future<void> signUsingPhoneNumber(
-      {String input = "", String smsCode = ""}) async {
+  Future<void> signUsingPhoneNumber(String phoneNumb) async {
     try {
       await auth.verifyPhoneNumber(
           timeout: const Duration(seconds: 60),
-          phoneNumber: input.replaceFirst(RegExp(r'0'), '+62'),
+          phoneNumber: phoneNumb.replaceFirst(RegExp(r'0'), '+62'),
+          verificationFailed: (e) => throw Exception(e.message),
+          codeAutoRetrievalTimeout: (verificationId) {},
           verificationCompleted: (PhoneAuthCredential cred) async =>
               await auth.signInWithCredential(cred),
-          verificationFailed: (e) => throw Exception(e.message),
           codeSent: (verificationId, forceResendingToken) async {
-            PhoneAuthCredential cred = PhoneAuthProvider.credential(
-                verificationId: verificationId, smsCode: smsCode);
-            await auth.signInWithCredential(cred);
-          },
-          codeAutoRetrievalTimeout: (verificationId) {});
+            // PhoneAuthCredential cred = PhoneAuthProvider.credential(
+            //     verificationId: verificationId, smsCode: smsCode);
+            // await auth.signInWithCredential(cred);
+          });
     } catch (e) {
       throw Exception(e.toString());
     }

@@ -1,3 +1,4 @@
+import 'package:chatify/shared/enum/authstate.dart';
 import 'package:flutter/material.dart';
 import '../view/signup_view.dart';
 
@@ -23,4 +24,11 @@ class SignupController extends State<SignupView> {
   final GlobalKey<FormState> key = GlobalKey<FormState>();
 
   TextEditingController textController = TextEditingController();
+
+  AuthState _authState = AuthState.notLoggedIn;
+  AuthState get authState => _authState;
+  void setAuthState(AuthState setAuthState) {
+    _authState = setAuthState;
+    setState(() {});
+  }
 }

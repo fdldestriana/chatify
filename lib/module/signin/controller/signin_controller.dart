@@ -1,4 +1,5 @@
-import 'package:chatify/module/signin/view/signin_view.dart';
+import 'package:chatify/core.dart';
+import 'package:chatify/shared/enum/authstate.dart';
 import 'package:flutter/material.dart';
 
 class SigninController extends State<SigninView> {
@@ -23,4 +24,23 @@ class SigninController extends State<SigninView> {
   final GlobalKey<FormState> key = GlobalKey<FormState>();
 
   TextEditingController textController = TextEditingController();
+
+  AuthState _authState = AuthState.notLoggedIn;
+  AuthState get authState => _authState;
+  void setAuthState(AuthState setAuthState) {
+    _authState = setAuthState;
+    setState(() {});
+  }
+
+  AuthService authService = AuthService();
+  Future<void> signUsingPhoneNumber() async {
+    setAuthState(AuthState.loading);
+    try {
+      await authService.signUsingPhoneNumber(textController.text);
+      setAuthState(AuthState.loggedIn);
+    } catch (e) {
+      setAuthState(AuthState.notLoggedIn);
+      throw e.toString();
+    }
+  }
 }

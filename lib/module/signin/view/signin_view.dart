@@ -1,8 +1,11 @@
 import 'package:chatify/module/signin/widget/component/re_remember_widget.dart';
 import 'package:chatify/module/signin/widget/component/re_textformfield_widget.dart';
+import 'package:chatify/shared/enum/authstate.dart';
+import 'package:chatify/shared/widget/re_bottotextauthscreen_widget.dart';
 import 'package:chatify/shared/widget/re_button_widget.dart';
+import 'package:chatify/shared/widget/re_loading_widget.dart';
 import 'package:chatify/shared/widget/re_logo_widget.dart';
-import 'package:flutter/gestures.dart';
+import 'package:chatify/shared/widget/re_notloggedin_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:chatify/core.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -12,8 +15,8 @@ class SigninView extends StatefulWidget {
 
   Widget build(context, SigninController controller) {
     controller.view = this;
-    String input = controller.textController.text;
-    AuthService authService = AuthService();
+    String phoneNumb = controller.textController.text;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -22,20 +25,10 @@ class SigninView extends StatefulWidget {
             children: [
               SizedBox(height: Get.height * 0.20),
               const ReLogoWidget(),
-              SizedBox(height: Get.height * 0.09),
-              SizedBox(
-                width: Get.width * 0.74,
-                height: Get.height * 0.04,
-                child: Text(
-                  "Sign in to your Account",
-                  style: GoogleFonts.poppins(
-                      color: const Color(0xFF000000),
-                      fontWeight: FontWeight.w700,
-                      fontSize: 20),
-                  textAlign: TextAlign.center,
-                ),
-              ),
-              SizedBox(height: Get.height * 0.04),
+              if (controller.authState == AuthState.notLoggedIn)
+                const ReNotLoggedInWidget(title: "Sign in to your Account")
+              else
+                const ReLoadingWidget(),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.11),
                 child: Column(
@@ -67,40 +60,19 @@ class SigninView extends StatefulWidget {
                       title: "Sign in",
                       width: Get.width * 0.77,
                       height: Get.height * 0.06,
-                      onPressed: (input.isEmpty)
-                          ? null
-                          : () async {
+                      onPressed: (phoneNumb.isNotEmpty)
+                          ? () {
                               if (controller.key.currentState!.validate()) {
-                                await authService.signUsingPhoneNumber(
-                                    input: input);
-                                Get.to(const EnterOtpView());
+                                controller.signUsingPhoneNumber();
                               }
-                            },
+                            }
+                          : null,
                     ),
                     SizedBox(height: Get.height * 0.06),
-                    Center(
-                      child: RichText(
-                        text: TextSpan(
-                          text: "Did You have an Account? ",
-                          style: GoogleFonts.poppins(
-                            color: const Color(0xFF000000),
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: "Sign up",
-                              recognizer: TapGestureRecognizer()
-                                ..onTap = () => Get.offAll(const SignupView()),
-                              style: GoogleFonts.poppins(
-                                color: const Color(0xFF31C48D),
-                                fontSize: 15,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
+                    ReBottomTextAuthScreenWidget(
+                      text: "Did You have an Account? ",
+                      title: "Sign up",
+                      onTap: () => Get.offAll(const SignupView()),
                     )
                   ],
                 ),
@@ -115,7 +87,3 @@ class SigninView extends StatefulWidget {
   @override
   State<SigninView> createState() => SigninController();
 }
-
-
-// for testing
-// +44 7444 555666 123456
