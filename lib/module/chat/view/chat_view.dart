@@ -1,6 +1,6 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:chatify/core.dart';
-import '../controller/chat_controller.dart';
 
 class ChatView extends StatefulWidget {
   const ChatView({Key? key}) : super(key: key);
@@ -11,7 +11,13 @@ class ChatView extends StatefulWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Chat"),
-        actions: const [],
+        actions: [
+          IconButton(
+              onPressed: () {
+                FirebaseAuth.instance.signOut();
+              },
+              icon: const Icon(Icons.logout))
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(

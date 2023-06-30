@@ -16,4 +16,6 @@ class EnterOtpController extends State<EnterOtpView> {
 
   @override
   Widget build(BuildContext context) => widget.build(context, this);
+  final GlobalKey<FormState> key = GlobalKey<FormState>();
+  TextEditingController otpController = TextEditingController();
 }

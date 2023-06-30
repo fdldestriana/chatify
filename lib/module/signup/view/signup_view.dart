@@ -23,7 +23,7 @@ class SignupView extends StatefulWidget {
             children: [
               SizedBox(height: Get.height * 0.20),
               const ReLogoWidget(),
-              const ReNotLoggedInWidget(title: "Sign in to your Account"),
+              const ReNotLoggedInWidget(title: "Sign up for free"),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.11),
                 child: Column(
