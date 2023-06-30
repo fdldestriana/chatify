@@ -1,10 +1,10 @@
 import 'package:chatify/firebase_options.dart';
+import 'package:chatify/module/chat/view/chat_view.dart';
 import 'package:chatify/module/wellcome/view/wellcome_view.dart';
 import 'package:chatify/service/auth/auth_service.dart';
 import 'package:chatify/state_util.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'module/chat/view/chat_view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,9 +1,7 @@
 import 'package:chatify/module/signin/widget/component/re_remember_widget.dart';
 import 'package:chatify/module/signin/widget/component/re_textformfield_widget.dart';
-import 'package:chatify/shared/enum/authstate.dart';
 import 'package:chatify/shared/widget/re_bottotextauthscreen_widget.dart';
 import 'package:chatify/shared/widget/re_button_widget.dart';
-import 'package:chatify/shared/widget/re_loading_widget.dart';
 import 'package:chatify/shared/widget/re_logo_widget.dart';
 import 'package:chatify/shared/widget/re_notloggedin_widget.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +14,7 @@ class SignupView extends StatefulWidget {
   Widget build(context, SignupController controller) {
     controller.view = this;
     String phoneNumb = controller.textController.text;
-    AuthService authService = AuthService();
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(
@@ -25,10 +23,7 @@ class SignupView extends StatefulWidget {
             children: [
               SizedBox(height: Get.height * 0.20),
               const ReLogoWidget(),
-              if (controller.authState == AuthState.notLoggedIn)
-                const ReNotLoggedInWidget(title: "Sign in to your Account")
-              else
-                const ReLoadingWidget(),
+              const ReNotLoggedInWidget(title: "Sign in to your Account"),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: Get.width * 0.11),
                 child: Column(
@@ -63,8 +58,7 @@ class SignupView extends StatefulWidget {
                         onPressed: (phoneNumb.isNotEmpty)
                             ? () async {
                                 if (controller.key.currentState!.validate()) {
-                                  await authService
-                                      .signUsingPhoneNumber(phoneNumb);
+                                  Get.to(EnterOtpView(phoneNumber: phoneNumb));
                                 }
                               }
                             : null),
