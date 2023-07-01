@@ -1,4 +1,3 @@
-import 'package:chatify/service/auth/auth_service.dart';
 import 'package:chatify/shared/enum/authstate.dart';
 import 'package:flutter/material.dart';
 import '../view/signup_view.dart';
@@ -33,11 +32,9 @@ class SignupController extends State<SignupView> {
     setState(() {});
   }
 
-  AuthService authService = AuthService();
   Future<void> signUpUsingPhoneNumber() async {
     setAuthState(AuthState.loading);
     try {
-      await authService.signUsingPhoneNumber(textController.text, context);
       setAuthState(AuthState.loggedIn);
     } catch (e) {
       setAuthState(AuthState.notLoggedIn);

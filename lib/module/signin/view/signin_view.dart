@@ -4,6 +4,7 @@ import 'package:chatify/shared/widget/re_bottotextauthscreen_widget.dart';
 import 'package:chatify/shared/widget/re_button_widget.dart';
 import 'package:chatify/shared/widget/re_logo_widget.dart';
 import 'package:chatify/shared/widget/re_notloggedin_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:chatify/core.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,7 @@ class SigninView extends StatefulWidget {
   Widget build(context, SigninController controller) {
     controller.view = this;
     String phoneNumb = controller.textController.text;
+    FirebaseAuth auth = FirebaseAuth.instance;
 
     return Scaffold(
       body: SingleChildScrollView(
@@ -56,9 +58,24 @@ class SigninView extends StatefulWidget {
                       width: Get.width * 0.77,
                       height: Get.height * 0.06,
                       onPressed: (phoneNumb.isNotEmpty)
-                          ? () {
+                          ? () async {
                               if (controller.key.currentState!.validate()) {
-                                Get.to(EnterOtpView(phoneNumber: phoneNumb));
+                                await auth.verifyPhoneNumber(
+                                    phoneNumber: phoneNumb.replaceFirst(
+                                        RegExp(r'0'), '+62'),
+                                    verificationCompleted:
+                                        (PhoneAuthCredential cred) async =>
+                                            await auth
+                                                .signInWithCredential(cred),
+                                    verificationFailed: (e) =>
+                                        throw Exception(e.message),
+                                    codeSent: (verificationId, _) async {
+                                      Get.to(EnterOtpView(
+                                          phoneNumber: phoneNumb,
+                                          verificationId: verificationId));
+                                    },
+                                    codeAutoRetrievalTimeout:
+                                        (verificationId) {});
                               }
                             }
                           : null,

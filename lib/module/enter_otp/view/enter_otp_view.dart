@@ -1,17 +1,21 @@
 import 'package:chatify/shared/utils/validator.dart';
 import 'package:chatify/shared/widget/re_button_widget.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:chatify/core.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:pinput/pinput.dart';
 
 class EnterOtpView extends StatefulWidget {
-  EnterOtpView({Key? key, required this.phoneNumber}) : super(key: key);
+  EnterOtpView(
+      {Key? key, required this.phoneNumber, required this.verificationId})
+      : super(key: key);
   final String phoneNumber;
+  final String verificationId;
 
   Widget build(context, EnterOtpController controller) {
     controller.view = this;
-    String otp = controller.otpController.text;
+    String smsCode = controller.otpController.text;
 
     return Scaffold(
       appBar: AppBar(
@@ -69,7 +73,7 @@ class EnterOtpView extends StatefulWidget {
                     controller.update();
                     debugPrint(input);
                   },
-                  validator: inputValidator,
+                  validator: (inputValidator),
                 ),
                 SizedBox(height: Get.height * 0.04),
                 SizedBox(
@@ -100,7 +104,17 @@ class EnterOtpView extends StatefulWidget {
                   title: "Verify",
                   width: Get.width * 0.77,
                   height: Get.height * 0.06,
-                  onPressed: (buttonValidator(otp) == null) ? () {} : null,
+                  onPressed: (buttonValidator(smsCode) == null)
+                      ? () async {
+                          PhoneAuthCredential cred =
+                              PhoneAuthProvider.credential(
+                                  verificationId: verificationId,
+                                  smsCode: smsCode);
+                          await FirebaseAuth.instance
+                              .signInWithCredential(cred);
+                          Get.to(const ChatView());
+                        }
+                      : null,
                 )
               ],
             ),

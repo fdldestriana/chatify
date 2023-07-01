@@ -32,11 +32,9 @@ class SigninController extends State<SigninView> {
     setState(() {});
   }
 
-  AuthService authService = AuthService();
   Future<void> signInUsingPhoneNumber() async {
     setAuthState(AuthState.loading);
     try {
-      await authService.signUsingPhoneNumber(textController.text, context);
       setAuthState(AuthState.loggedIn);
     } catch (e) {
       setAuthState(AuthState.notLoggedIn);

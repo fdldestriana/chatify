@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
 class AuthService {
   FirebaseAuth auth = FirebaseAuth.instance;
@@ -11,8 +10,7 @@ class AuthService {
     }
   }
 
-  Future<void> signUsingPhoneNumber(
-      String phoneNumb, BuildContext context) async {
+  Future<void> signUsingPhoneNumber(String phoneNumb) async {
     try {
       await auth.verifyPhoneNumber(
         timeout: const Duration(seconds: 60),
@@ -21,12 +19,7 @@ class AuthService {
         codeAutoRetrievalTimeout: (verificationId) {},
         verificationCompleted: (PhoneAuthCredential cred) async =>
             await auth.signInWithCredential(cred),
-        codeSent: (verificationId, _) async {
-          // TextEditingController controller = TextEditingController();
-          // PhoneAuthCredential cred = PhoneAuthProvider.credential(
-          //     verificationId: verificationId, smsCode: smsCode);
-          // await auth.signInWithCredential(cred);
-        },
+        codeSent: (verificationId, _) async {},
       );
     } catch (e) {
       throw Exception(e.toString());
