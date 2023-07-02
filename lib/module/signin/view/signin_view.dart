@@ -61,12 +61,11 @@ class SigninView extends StatefulWidget {
                           ? () async {
                               if (controller.key.currentState!.validate()) {
                                 await auth.verifyPhoneNumber(
+                                    timeout: const Duration(seconds: 120),
                                     phoneNumber: phoneNumb.replaceFirst(
                                         RegExp(r'0'), '+62'),
                                     verificationCompleted:
-                                        (PhoneAuthCredential cred) async =>
-                                            await auth
-                                                .signInWithCredential(cred),
+                                        (PhoneAuthCredential cred) {},
                                     verificationFailed: (e) =>
                                         throw Exception(e.message),
                                     codeSent: (verificationId, _) async {

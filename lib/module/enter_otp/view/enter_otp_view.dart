@@ -112,7 +112,7 @@ class EnterOtpView extends StatefulWidget {
                                   smsCode: smsCode);
                           await FirebaseAuth.instance
                               .signInWithCredential(cred);
-                          Get.to(const ChatView());
+                          await Get.to(const ChatView());
                         }
                       : null,
                 )
