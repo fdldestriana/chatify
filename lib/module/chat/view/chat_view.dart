@@ -1,4 +1,5 @@
 import 'package:chatify/module/chat/widget/component/re_tabbarbody_widget.dart';
+import 'package:chatify/shared/widget/re_button_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:chatify/core.dart';
@@ -76,17 +77,43 @@ class ChatView extends StatefulWidget {
             height: Get.height * 0.67,
             child: TabBarView(
               controller: controller.tabController,
-              children: const [
-                ReTabBarBodyWidget(title: "You haven't chat yet"),
-                ReTabBarBodyWidget(title: "You haven't group yet"),
-                ReTabBarBodyWidget(title: "You haven't status yet"),
-                ReTabBarBodyWidget(title: "You haven't call yet"),
+              children: [
+                ReTabBarBodyWidget(
+                    title: "You haven't chat yet",
+                    reButtonWidget: ReButtonWidget(
+                      title: "Start Chatting",
+                      width: Get.width * 0.45,
+                      height: Get.height * 0.05,
+                      onPressed: () {},
+                    )),
+                ReTabBarBodyWidget(
+                    title: "You haven't group yet",
+                    reButtonWidget: ReButtonWidget(
+                      title: "Create Group",
+                      width: Get.width * 0.45,
+                      height: Get.height * 0.05,
+                      onPressed: () {},
+                    )),
+                const ReTabBarBodyWidget(title: "You haven't status yet"),
+                ReTabBarBodyWidget(
+                    title: "You haven't call yet",
+                    reButtonWidget: ReButtonWidget(
+                      title: "Start Call",
+                      width: Get.width * 0.45,
+                      height: Get.height * 0.05,
+                      onPressed: () {},
+                    )),
               ],
             ),
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(onPressed: () {}),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.transparent,
+        elevation: 0.0,
+        onPressed: () {},
+        child: Image.asset("assets/buttons/chat_button.png"),
+      ),
     );
   }
 
