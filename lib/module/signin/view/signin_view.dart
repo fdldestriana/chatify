@@ -65,7 +65,9 @@ class SigninView extends StatefulWidget {
                                     phoneNumber: phoneNumb.replaceFirst(
                                         RegExp(r'0'), '+62'),
                                     verificationCompleted:
-                                        (PhoneAuthCredential cred) {},
+                                        (PhoneAuthCredential cred) {
+                                      auth.signInWithCredential(cred);
+                                    },
                                     verificationFailed: (e) =>
                                         throw Exception(e.message),
                                     codeSent: (verificationId, _) async {
