@@ -1,9 +1,3 @@
-import 'package:chatify/module/signin/widget/component/re_remember_widget.dart';
-import 'package:chatify/module/signin/widget/component/re_textformfield_widget.dart';
-import 'package:chatify/shared/widget/re_bottotextauthscreen_widget.dart';
-import 'package:chatify/shared/widget/re_button_widget.dart';
-import 'package:chatify/shared/widget/re_logo_widget.dart';
-import 'package:chatify/shared/widget/re_notloggedin_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:chatify/core.dart';

@@ -4,6 +4,7 @@
         "signin",
         "signup",
         "enter_otp",
+        "home",
         "chat"
     ],
     "module_directory_name": "module",

@@ -1,5 +1,4 @@
 import 'package:chatify/core.dart';
-import 'package:chatify/shared/enum/authstate.dart';
 import 'package:flutter/material.dart';
 
 class SigninController extends State<SigninView> {

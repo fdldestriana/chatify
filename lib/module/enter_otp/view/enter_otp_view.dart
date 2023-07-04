@@ -1,5 +1,4 @@
-import 'package:chatify/shared/utils/validator.dart';
-import 'package:chatify/shared/widget/re_button_widget.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:chatify/core.dart';
@@ -16,6 +15,7 @@ class EnterOtpView extends StatefulWidget {
   Widget build(context, EnterOtpController controller) {
     controller.view = this;
     String smsCode = controller.otpController.text;
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
 
     return Scaffold(
       appBar: AppBar(
@@ -110,9 +110,17 @@ class EnterOtpView extends StatefulWidget {
                               PhoneAuthProvider.credential(
                                   verificationId: verificationId,
                                   smsCode: smsCode);
-                          await FirebaseAuth.instance
+                          UserCredential userCred = await FirebaseAuth.instance
                               .signInWithCredential(cred);
-                          await Get.to(const ChatView());
+                          firestore
+                              .collection("users")
+                              .doc(userCred.user!.uid)
+                              .set({
+                            "uid": userCred.user!.uid,
+                            "phoneNumber": phoneNumber
+                          });
+
+                          await Get.to(const HomeView());
                         }
                       : null,
                 )

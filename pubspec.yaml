@@ -45,6 +45,7 @@ flutter:
   assets:
     - assets/buttons/
     - assets/launcher/
+    - assets/profile_pictures/
     - assets/splash/
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -1,5 +1,3 @@
-import 'package:chatify/shared/widget/re_button_widget.dart';
-import 'package:chatify/shared/widget/re_logo_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:chatify/core.dart';

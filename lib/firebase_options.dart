@@ -63,7 +63,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '640589896428',
     projectId: 'chatify-c8226',
     storageBucket: 'chatify-c8226.appspot.com',
-    iosClientId: '640589896428-bkld4pmkqc6gc1ede0cm4hmqlep1d18v.apps.googleusercontent.com',
+    iosClientId:
+        '640589896428-bkld4pmkqc6gc1ede0cm4hmqlep1d18v.apps.googleusercontent.com',
     iosBundleId: 'com.example.chatify',
   );
 }
