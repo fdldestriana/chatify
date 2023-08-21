@@ -17,6 +17,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       navigatorKey: Get.navigatorKey,
       theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+            iconTheme: IconThemeData(
+          color: Color(0xFF31C48D),
+        )),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),

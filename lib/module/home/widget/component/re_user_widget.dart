@@ -10,7 +10,7 @@ class ReUserWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Get.to(const ChatView()),
+      onTap: () => Get.to(ChatView(data: data)),
       child: SizedBox(
         width: double.infinity,
         height: Get.height * 0.09,

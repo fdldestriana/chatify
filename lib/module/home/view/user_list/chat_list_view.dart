@@ -27,33 +27,15 @@ class _UserListViewState extends State<UserListView> {
           return const Center(
               child: CircularProgressIndicator(color: Color(0xFF31C48D)));
         }
-        if (!snapshot.hasData) {
-          return BlankUserList(
-            title: "You haven't chat yet",
-            reButtonWidget: ReButtonWidget(
-              title: "Start Chatting",
-              width: Get.width * 0.45,
-              height: Get.height * 0.05,
-              onPressed: () {},
-            ),
-          );
-        }
-        // var widgets = snapshot.data!.docs.map<Widget>((doc) {
-        //   var data = doc.data()! as Map<String, dynamic>;
-
-        //   if (data["uid"] != FirebaseAuth.instance.currentUser!.uid) {
-        //     ReUserWidget(data: data);
-        //   }
-        // }).toList();
-        List<ReUserWidget>? widgets;
-        var docs = snapshot.data!.docs;
-        for (Map<String, dynamic> doc in docs) {
-          if (doc["uid"] != FirebaseAuth.instance.currentUser!.uid) {
-            widgets!.add(ReUserWidget(data: doc));
+        if (snapshot.hasData) {
+          List<ReUserWidget> widgets = [];
+          var docs = snapshot.data!.docs;
+          for (var doc in docs) {
+            Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+            if (data["uid"] != FirebaseAuth.instance.currentUser!.uid) {
+              widgets.add(ReUserWidget(data: data));
+            }
           }
-        }
-
-        if (widgets!.isNotEmpty) {
           return UserList(widgets: widgets);
         } else {
           return BlankUserList(
