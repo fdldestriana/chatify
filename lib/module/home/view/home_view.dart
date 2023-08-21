@@ -1,4 +1,4 @@
-import 'package:chatify/module/home/view/chat_list_view.dart';
+import 'package:chatify/module/home/view/user_list/chat_list_view.dart';
 import 'package:chatify/module/home/widget/component/re_tabbarbody_widget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -78,32 +78,26 @@ class HomeView extends StatefulWidget {
             child: TabBarView(
               controller: controller.tabController,
               children: [
-                const ChatListView(),
-                // ReTabBarBodyWidget(
-                //     title: "You haven't chat yet",
-                //     reButtonWidget: ReButtonWidget(
-                //       title: "Start Chatting",
-                //       width: Get.width * 0.45,
-                //       height: Get.height * 0.05,
-                //       onPressed: () {},
-                //     )),
+                const UserListView(),
                 ReTabBarBodyWidget(
-                    title: "You haven't group yet",
-                    reButtonWidget: ReButtonWidget(
-                      title: "Create Group",
-                      width: Get.width * 0.45,
-                      height: Get.height * 0.05,
-                      onPressed: () {},
-                    )),
+                  title: "You haven't group yet",
+                  reButtonWidget: ReButtonWidget(
+                    title: "Create Group",
+                    width: Get.width * 0.45,
+                    height: Get.height * 0.05,
+                    onPressed: () {},
+                  ),
+                ),
                 const ReTabBarBodyWidget(title: "You haven't status yet"),
                 ReTabBarBodyWidget(
-                    title: "You haven't call yet",
-                    reButtonWidget: ReButtonWidget(
-                      title: "Start Call",
-                      width: Get.width * 0.45,
-                      height: Get.height * 0.05,
-                      onPressed: () {},
-                    )),
+                  title: "You haven't call yet",
+                  reButtonWidget: ReButtonWidget(
+                    title: "Start Call",
+                    width: Get.width * 0.45,
+                    height: Get.height * 0.05,
+                    onPressed: () {},
+                  ),
+                ),
               ],
             ),
           ),

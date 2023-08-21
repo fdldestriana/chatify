@@ -12,27 +12,29 @@ class ReTabBarBodyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Center(
-          child: ReLogoWidget(
-            width: Get.width * 0.24,
-            height: Get.height * 0.11,
+    return Scaffold(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Center(
+            child: ReLogoWidget(
+              width: Get.width * 0.24,
+              height: Get.height * 0.11,
+            ),
           ),
-        ),
-        SizedBox(height: Get.height * 0.03),
-        Text(
-          title,
-          style: GoogleFonts.poppins(
-              color: const Color(0xFF07DC8A),
-              fontSize: 16,
-              fontWeight: FontWeight.w700),
-        ),
-        SizedBox(height: Get.height * 0.03),
-        reButtonWidget ?? Container()
-      ],
+          SizedBox(height: Get.height * 0.03),
+          Text(
+            title,
+            style: GoogleFonts.poppins(
+                color: const Color(0xFF07DC8A),
+                fontSize: 16,
+                fontWeight: FontWeight.w700),
+          ),
+          SizedBox(height: Get.height * 0.03),
+          reButtonWidget ?? Container()
+        ],
+      ),
     );
   }
 }
