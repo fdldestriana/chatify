@@ -22,7 +22,7 @@ class ChatView extends StatefulWidget {
               onPressed: () {},
               icon: Image.asset("assets/icon_buttons/more_vert.png")),
         ],
-        titleSpacing: 0,
+        titleSpacing: 0.5,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -41,6 +41,9 @@ class ChatView extends StatefulWidget {
             ),
           ],
         ),
+      ),
+      body: Column(
+        children: [Expanded(child: _buildMessageList()), _buildMessageInput()],
       ),
     );
   }

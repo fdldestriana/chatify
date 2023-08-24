@@ -18,7 +18,7 @@ export 'package:chatify/module/signup/controller/signup_controller.dart';
 export 'package:chatify/module/signup/view/signup_view.dart';
 export 'package:chatify/module/wellcome/controller/wellcome_controller.dart';
 export 'package:chatify/module/wellcome/view/wellcome_view.dart';
-export 'package:chatify/service/auth/auth_service.dart';
+export 'package:chatify/service/auth_service/auth_service.dart';
 export 'package:chatify/shared/enum/authstate.dart';
 export 'package:chatify/shared/utils/validator.dart';
 export 'package:chatify/shared/widget/re_bottotextauthscreen_widget.dart';
